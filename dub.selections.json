@@ -1,0 +1,7 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"cpuid": "0.2.6",
+		"mir": "0.18.0-beta0"
+	}
+}

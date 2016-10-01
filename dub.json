@@ -1,0 +1,10 @@
+{
+	"name": "simple",
+	"authors": [
+		"Mathias Baumann"
+	],
+	"description": "A minimal neural net application",
+	"copyright": "Copyright © 2016, Mathias Baumann",
+	"license": "proprietary",
+    "dependencies": { "mir" : "~>0.17.0-alpha9" }
+}
