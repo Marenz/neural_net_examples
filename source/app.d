@@ -5,11 +5,13 @@ import mir.glas.common;
 GlasContext glas;
 
 
-void dot ( Matrix2d mat, Vector vec, ref Vector result )
+
+void dot ( Mat, Vec, Result ) ( Mat mat, Vec vec, ref Result result )
 {
     import mir.glas.l2;
 
-    gemv!(double, double, double)(&glas, 1.0L, mat, vec, 0.0, result);
+    gemv!(double, double, double)(&glas, 1.0L, mat, vec.transposed[0], 0.0,
+            result.transposed[0]);
 }
 
 
@@ -57,7 +59,7 @@ void main()
     auto y = slice!double([4, 1]);
     y.transposed[] = [0.0, 0.0, 0.0, 1.0];
 
-    auto syn0 = randomSlice(-1.0, 1.0, 3);
+    auto syn0 = randomSlice(-1.0, 1.0, 3, 1);
 
 	writefln("my x: %s\nmy y: %s\nsyn0: %s", x, y, syn0);
 
@@ -66,39 +68,30 @@ void main()
 
     auto dot_result = slice!double(syn0.shape);
 
-    Vector l1 = slice!double([4]);
-    foreach (iter; 0..1000)
+    auto l1 = slice!double([4, 1]);
+
+    foreach (iter; 0..100000)
     {
         auto l0 = x;
 
         l0.dot(syn0, l1);
-
-        //writefln("%s dot %s = %s", l0, syn0, l1);
-
         l1.ndEach!((ref a)=>a=sigmoid(a));
 
         l1_error[] = y;
-        l1_error.transposed[] -= l1;
-
-        //writefln("SYN0 : %s", syn0);
-       // writefln("ERROR FOUND: %s", l1_error);
+        l1_error[] -= l1;
 
         l1_delta[] = l1_error;
 
-        auto zip = assumeSameStructure!("l1_delta",
-                "l1")(l1_delta.transposed[][0],
-                    l1);
+        auto zip = assumeSameStructure!("l1_delta", "l1")(l1_delta, l1);
 
         zip.ndEach!((z) { //writefln("l1_delta %s, l1: %s", z.l1_delta, z.l1);
                 z.l1_delta = z.l1_delta * sigmoid_derived(z.l1); });
 
-        writefln("l1 delta: %s", l1_delta);
-
-        l0.transposed.dot(l1_delta.transposed[][0], dot_result);
+        l0.transposed.dot(l1_delta, dot_result);
 
         syn0[] += dot_result;
-
-        writefln("RESULT: %s", l1);
     }
 
+
+    writefln("RESULT: %s", l1);
 }
