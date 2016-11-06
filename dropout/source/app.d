@@ -6,11 +6,11 @@ GlasContext glas;
 
 
 
-void dot ( Mat, Vec, Result ) ( Mat mat, Vec vec, ref Result result )
+void dot ( Mat, Mat1, Result ) ( Mat mat, Mat1 mat2, ref Result result )
 {
     import mir.glas.l3;
 
-    gemm!(double, double, double)(&glas, 1.0L, mat, vec, 0.0, result);
+    gemm!(double, double, double)(&glas, 1.0L, mat, mat2, 0.0, result);
 }
 
 
