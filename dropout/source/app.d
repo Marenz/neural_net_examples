@@ -46,6 +46,8 @@ alias Vector = Slice!(1, double*);
 
 void main()
 {
+    enum HiddenNeurons = 32;
+
     auto x = slice!double([4, 3]);
 
     x[0][] = [0.0, 0.0 ,1.0];
@@ -59,8 +61,8 @@ void main()
     y[] = [[0.0], [1.0], [1.0], [0.0]];
 
 
-    auto syn0 = randomSlice(-1.0, 1.0, 3, 4);
-    auto syn1 = randomSlice(-1.0, 1.0, 4, 1);
+    auto syn0 = randomSlice(-1.0, 1.0, 3, HiddenNeurons);
+    auto syn1 = randomSlice(-1.0, 1.0, HiddenNeurons, 1);
 
 	writefln("Trains XOR\nmy x: %s\nmy y: %s\nsyn0: %s\nsyn1: %s", x, y, syn0, syn1);
 
@@ -68,7 +70,7 @@ void main()
     auto dot_result0 = slice!double(syn0.shape);
     auto dot_result1 = slice!double(syn1.shape);
 
-    auto l1 = slice!double([4, 4]);
+    auto l1 = slice!double([4, HiddenNeurons]);
     auto l2 = slice!double([4, 1]);
 
     auto l1_error = slice!double(l1.shape);
@@ -78,7 +80,7 @@ void main()
     auto l2_delta = slice!double(l2.shape);
 
     writefln("######");
-    foreach (iter; 0..100000)
+    foreach (iter; 0..10000)
     {
         auto l0 = x;
 
