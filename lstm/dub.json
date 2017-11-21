@@ -1,0 +1,12 @@
+{
+	"name": "lstm",
+	"authors": [
+		"Mathias Baumann"
+	],
+	"description": "A minimal neural net application",
+	"copyright": "Copyright © 2016, Mathias Baumann",
+	"license": "GPLv3",
+    "dependencies": { "lubeck" : "~>0.0.4" },
+
+    "targetType": "executable"
+}

@@ -1,0 +1,13 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"cblas": "2.0.0",
+		"cpuid": "0.2.6",
+		"lapack": "0.0.2",
+		"lubeck": "0.0.4",
+		"mir": "0.18.0-beta0",
+		"mir-algorithm": "0.6.21",
+		"mir-blas": "0.0.2",
+		"mir-lapack": "0.0.3"
+	}
+}
