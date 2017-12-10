@@ -117,6 +117,10 @@ for j in range(10000):
 
         # error at output layer
         layer_2_delta = layer_2_deltas[-position-1]
+
+        print "MULT:\n"+str(layer_2_delta)+"\n"+str(synapse_1.T)
+        print "= : "+str(layer_2_delta.dot(synapse_1.T))
+
         # error at hidden layer
         layer_1_delta = (future_layer_1_delta.dot(synapse_h.T) + layer_2_delta.dot(synapse_1.T)) * sigmoid_output_to_derivative(layer_1)
 

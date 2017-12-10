@@ -6,7 +6,11 @@
 	"description": "A minimal neural net application",
 	"copyright": "Copyright © 2016, Mathias Baumann",
 	"license": "GPLv3",
-    "dependencies": { "lubeck" : "~>0.0.4" },
+    "dependencies": { "mir-algorithm" : "~>0.6.21",
+        "mir-glas": "~>0.2.3",
+        "mir-cpuid": "~>0.5.2"
+    },
+    "lflags": ["-L$MIR_GLAS_PACKAGE_DIR", "-L$MIR_CPUID_PACKAGE_DIR"],
 
-    "targetType": "executable"
+    "targetType": "executable",
 }

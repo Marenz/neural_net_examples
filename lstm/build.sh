@@ -1,1 +1,3 @@
-dub  --compiler=/home/marenz/Downloads/ldc2-1.1.0-beta2-linux-x86_64/bin/ldmd2  -b release 
+PATH=/home/marenz/Downloads/ldc2-1.5.0-linux-x86_64/bin/:$PATH
+
+dub --compiler=ldmd2  -b debug
